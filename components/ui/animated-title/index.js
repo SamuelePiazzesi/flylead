@@ -1,28 +1,21 @@
 import React, { useEffect, useRef } from "react";
+import { themeColors } from "../../shared/constants";
 
 const AnimatedTitle = () => {
 	const canvasRef = useRef(null);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
-		console.log(canvas);
 		const ctx = canvas.getContext("2d");
 		let particles = [];
 		let amount = 0;
 		let mouse = { x: 0, y: 0 };
 		let radius = 1;
 
-		var colors = [
-			"#81599F",
-			"#2b2d68",
-			"#E4D456",
-			"#57128B",
-			"#4D59D2",
-			"#D88604",
-		];
+		const colors = Object.values(themeColors);
 
-		var ww = (canvas.width = window.innerWidth);
-		var wh = (canvas.height = window.innerHeight);
+		let ww = (canvas.width = window.innerWidth);
+		let wh = (canvas.height = window.innerHeight);
 
 		function Particle(x, y) {
 			this.x = Math.random() * ww;
@@ -31,7 +24,7 @@ const AnimatedTitle = () => {
 				x: x,
 				y: y,
 			};
-			this.r = Math.random() * 5 + 2;
+			this.r = Math.random() * 3 + 2;
 			this.vx = (Math.random() - 0.5) * 20;
 			this.vy = (Math.random() - 0.5) * 20;
 			this.accX = 0;
@@ -61,9 +54,9 @@ const AnimatedTitle = () => {
 			const b = this.y - mouse.y;
 
 			const distance = Math.sqrt(a * a + b * b);
-			if (distance < radius * 70) {
-				this.accX = (this.x - mouse.x) / 100;
-				this.accY = (this.y - mouse.y) / 100;
+			if (distance < radius * 140) {
+				this.accX = (this.x - mouse.x) / 50;
+				this.accY = (this.y - mouse.y) / 50;
 				this.vx += this.accX;
 				this.vy += this.accY;
 			}
@@ -88,15 +81,15 @@ const AnimatedTitle = () => {
 
 		function initScene() {
 			ww = canvas.width = window.innerWidth;
-			wh = canvas.height = window.innerHeight / 2;
+			wh = canvas.height = window.innerHeight / 1.75;
 
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-			ctx.font = "bold " + ww / 3.5 + "px sans-serif";
-			ctx.lineHeight = ww * 2;
+			ctx.font = "bold " + ww / 5 + "px sans-serif";
+			ctx.lineHeight = ww;
 			ctx.textAlign = "center";
 			ctx.textBaseline = "middle";
-			ctx.fillText("Flylead", ww / 2, wh / 2);
+			ctx.fillText("Athenix", ww / 2, wh / 2);
 
 			let data = ctx.getImageData(0, 0, ww, wh).data;
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -134,13 +127,11 @@ const AnimatedTitle = () => {
 		window.addEventListener("touchend", onTouchEnd);
 		initScene();
 		requestAnimationFrame(render);
-
-		console.log("ciao");
 	}, []);
 
 	return (
-		<div className="mt-5">
-			<canvas id="scene" className="w-full h-72" ref={canvasRef}></canvas>
+		<div className="">
+			<canvas id="scene" className="w-full" ref={canvasRef}></canvas>
 		</div>
 	);
 };
