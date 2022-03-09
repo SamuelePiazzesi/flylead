@@ -148,7 +148,7 @@ const Metrics = () => {
 						<div className="mt-10">
 							<a href="#" className="text-base font-medium text-neon">
 								{" "}
-								Learn more about how we're changing the world{" "}
+								Learn more about how we are changing the world{" "}
 								<span aria-hidden="true">&rarr;</span>{" "}
 							</a>
 						</div>
